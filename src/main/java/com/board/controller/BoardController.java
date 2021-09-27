@@ -1,6 +1,7 @@
 package com.board.controller;
 
 import com.board.domain.BoardVO;
+import com.board.domain.Page;
 import com.board.service.BoardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -76,6 +77,31 @@ public class BoardController {
     @GetMapping("/listPage")
     public void getListPage(Model model, @RequestParam("num") int num) throws Exception {
 
+        Page page = new Page();
+
+        page.setNum(num);
+        page.setCount(service.count());
+
+        List<BoardVO> list = null;
+        list = service.listPage(page.getDisplayPost(), page.getPostNum());
+
+        model.addAttribute("list", list);
+
+        /*
+        model.addAttribute("pageNum", page.getPageNum());
+
+        model.addAttribute("startPageNum", page.getStartPageNum());
+        model.addAttribute("endPageNum", page.getEndPageNum());
+
+        model.addAttribute("prev", page.getPrev());
+        model.addAttribute("next", page.getNext());
+        */
+
+        model.addAttribute("page", page);
+
+        model.addAttribute("select", num);
+
+        /*
         // 게시물 총 갯수
         int count = service.count();
 
@@ -120,11 +146,7 @@ public class BoardController {
 
         // 현재 페이지
         model.addAttribute("select", num);
-
-        List list = null;
-        list = service.listPage(displayPost, postNum);
-        model.addAttribute("list", list);
-        model.addAttribute("pageNum", pageNum);
+        */
     }
 
 }
