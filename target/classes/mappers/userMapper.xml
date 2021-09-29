@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.mappers.user">
+    <select id="selectByEmail" resultType="com.board.domain.UserVO">
+        <![CDATA[
+        SELECT
+            EMAIL,
+            NAME
+        FROM
+            tbl_user
+        WHERE
+            EMAIL = #{email}
+        ]]>
+    </select>
+
+    <select id="selectById" resultType="com.board.domain.UserVO">
+        <![CDATA[
+        SELECT
+            *
+        FROM
+            tbl_user
+        WHERE
+            ID = #{id}
+        ]]>
+    </select>
+
+    <insert id="register">
+        <![CDATA[
+        INSERT INTO tbl_user
+        (
+            EMAIL,
+            ID,
+            NAME,
+            PASSWORD,
+            REGDATE
+        )
+        VALUES
+            (
+                #{email},
+                #{id},
+                #{name},
+                #{pw},
+                SYSDATE()
+            )
+        ]]>
+    </insert>
+</mapper>
