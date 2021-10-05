@@ -25,4 +25,9 @@ public class SecurityController {
     public String adminPage() throws Exception{
         return "/admin/page";
     }
+
+    @GetMapping("/secu/loginPage")
+    public String loginPage() throws Exception{
+        return "/secu/loginPage";
+    }
 }
