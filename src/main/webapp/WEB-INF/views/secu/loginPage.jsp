@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 82107
@@ -15,6 +16,13 @@
 <form name="f" action="/login" method="POST">
     <input type="text" class="form-control" name="loginId" placeholder="example">
     <input type="password" class="form-control" name="loginPwd" placeholder="Password">
+    <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+        <font color="red">
+            <p>Your login attempt was not successful due to <br/>
+                    ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</p>
+            <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
+        </font>
+    </c:if>
     <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
     <button type="submit" class="btn btn-primary">Sign in</button>
 </form>

@@ -30,4 +30,9 @@ public class SecurityController {
     public String loginPage() throws Exception{
         return "/secu/loginPage";
     }
+
+    @GetMapping(value="/access_denied_page")
+    public String accessDeniedPage() throws Exception {
+        return "/access_denied_page";
+    }
 }
