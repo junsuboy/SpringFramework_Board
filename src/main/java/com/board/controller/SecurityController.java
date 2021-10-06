@@ -2,6 +2,7 @@ package com.board.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class SecurityController {
@@ -34,5 +35,10 @@ public class SecurityController {
     @GetMapping(value="/access_denied_page")
     public String accessDeniedPage() throws Exception {
         return "/access_denied_page";
+    }
+
+    @PostMapping (value="/logout")
+    public String logout() throws Exception {
+        return "/logout";
     }
 }

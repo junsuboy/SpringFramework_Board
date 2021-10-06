@@ -8,6 +8,13 @@
     <h5><a href='<c:url value="/secu/loginPage"/>'>LOGIN</a> 로그인 해주세요.</h5>
 </sec:authorize>
 
+<sec:authorize access="isAuthenticated()">
+    <p><sec:authentication property="principal.username"/>님, 반갑습니다.<br/> </p>
+    <a href="#" onclick="document.getElementById('logout-form').submit();">Sign out</a>
+    <form id="logout-form" action='<c:url value='/logout'/>' method="POST">
+        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+</sec:authorize>
+
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
