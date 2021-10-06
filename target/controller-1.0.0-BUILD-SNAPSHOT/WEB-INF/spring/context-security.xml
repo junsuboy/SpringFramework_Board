@@ -2,10 +2,13 @@
 <beans:beans xmlns="http://www.springframework.org/schema/security"
              xmlns:beans="http://www.springframework.org/schema/beans"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:context="http://www.springframework.org/schema/context"
              xsi:schemaLocation="http://www.springframework.org/schema/beans
                                  http://www.springframework.org/schema/beans/spring-beans.xsd
                                  http://www.springframework.org/schema/security
-                                 http://www.springframework.org/schema/security/spring-security.xsd">
+                                 http://www.springframework.org/schema/security/spring-security.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+
 
     <http auto-config="true" use-expressions="true">
         <intercept-url pattern="/member/**" access="hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')"/>
@@ -29,6 +32,8 @@
         />
     </http>
 
+    <context:component-scan base-package="com.board.dao"/>
+
     <jdbc-user-service data-source-ref="dataSource" id="userServ"
                        users-by-username-query="SELECT ID as loginId, PASSWORD as loginPwd, ENABLED FROM user WHERE ID=?"
                        authorities-by-username-query="SELECT ID as loginID, AUTHORITY FROM user WHERE ID=?"
@@ -38,5 +43,8 @@
         <authentication-provider user-service-ref="userServ">
         </authentication-provider>
     </authentication-manager>
+
+    <beans:bean id="userServ" class="com.board.service.CustomUserDetailsService">
+    </beans:bean>
 
 </beans:beans>
