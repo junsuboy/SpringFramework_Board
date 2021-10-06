@@ -40,11 +40,13 @@
     />
 
     <authentication-manager>
+        <authentication-provider ref="userAuthProvider">
+        </authentication-provider>
         <authentication-provider user-service-ref="userServ">
         </authentication-provider>
     </authentication-manager>
 
-    <beans:bean id="userServ" class="com.board.service.CustomUserDetailsService">
-    </beans:bean>
+    <beans:bean id="userServ" class="com.board.service.CustomUserDetailsService"></beans:bean>
+    <beans:bean id="userAuthProvider" class="com.board.service.CustomAuthenticationProvider"></beans:bean>
 
 </beans:beans>
